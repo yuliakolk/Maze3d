@@ -2,7 +2,7 @@ package controller;
 
 import java.util.HashMap;
 
-import Model.Model;
+import model.Model;
 import algorithms.mazeGenerators.Maze3d;
 import view.View;
 
