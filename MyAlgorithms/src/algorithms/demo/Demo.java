@@ -45,7 +45,7 @@ public class Demo {
 		
 
 		System.out.println(maze);
-
+		//test
 		
 
 		SearchableMaze3d mys= new SearchableMaze3d(maze);
