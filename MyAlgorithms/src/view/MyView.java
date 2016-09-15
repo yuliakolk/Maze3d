@@ -2,7 +2,9 @@ package view;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
@@ -11,6 +13,7 @@ import algorithms.search.Solution;
 import controller.Command;
 import controller.Controller;
 import controller.MyController;
+import io.MyCompressorOutputStream;
 
 public class MyView implements View {
 
@@ -149,8 +152,15 @@ public class MyView implements View {
 			out.println(sol.getStates().get(i));
 			out.flush();
 		}
-
 }
+	
+	@Override
+	public void displayMessage(String msg) {
+		out.println(msg);
+		out.flush();		
+	}
+
+	
 }
 
 		

@@ -1,10 +1,19 @@
 package controller;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 
 import model.Model;
+import model.MyModel;
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.search.Solution;
+import io.MyCompressorOutputStream;
+import io.MyDecompressorInputStream;
 import view.MyView;
 import view.View;
 
@@ -28,7 +37,7 @@ public class CommandsManager {
 		commands.put("load_maze", new loadMazeCommand());
 		commands.put("solve", new solveCommand());
 		commands.put("display_solution", new displaySolutionCommand());
-		commands.put("exit", new displaySolutionCommand());
+		commands.put("exit", new ExitCommand());
 		
 		
 		return commands;
@@ -92,18 +101,33 @@ public class CommandsManager {
 	public class saveMazeCommand implements Command {
 
 		@Override
-		public void doCommand(String[] args) {
+		public void doCommand(String[] args){
 			String name = args[0];
-// to do
+			System.out.println("please enter the name of the file you want to write the maze");
+			String fileName=((MyView) view).OnStringRecieved();
+			try{
+			((MyModel)model).saveMaze(name,fileName);
 		}
+			catch (Exception e) {
+				view.displayMessage(e.toString());
+			}
 		
 	}
+	}
+	
 	public class loadMazeCommand implements Command {
 
 		@Override
 		public void doCommand(String[] args) {
 			String name = args[0];
-// to do
+			System.out.println("please enter the name of the file you want to load the maze");
+			String fileName=((MyView) view).OnStringRecieved();
+			try{
+				((MyModel)model).loadMaze(name,fileName);
+			}
+				catch (Exception e) {
+					view.displayMessage(e.toString());
+				}
 		}
 		
 	}
@@ -134,4 +158,15 @@ public class CommandsManager {
 		}
 		
 	}
+	
+	
+	public class ExitCommand implements Command {
+
+		@Override
+		public void doCommand(String[] args) {
+			model.exit();
+		}
+		
+	}
 }
+

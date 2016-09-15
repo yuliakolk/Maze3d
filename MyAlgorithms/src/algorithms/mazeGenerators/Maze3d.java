@@ -1,14 +1,13 @@
 package algorithms.mazeGenerators;
 
 /**
-* @author  Yulia Kolk
+* @author Yulia Kolk
 * @version 1.0
 * @since   30/08/2015 
 * 
  * <h1>Maze3d</h1>
  * This class defining Maze3d
  */
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,43 +18,48 @@ public class Maze3d {
 	private int floors;
 	private Position startPosition;
 	private Position goalPosition;
-	
-    private int[][][] maze;
-	
+
+	private int[][][] maze;
+
 	public static final int FREE = 0;
 	public static final int WALL = 1;
-	
-	//Constractor 
-		/**
-		 * This Constractor get 3 parameters : cols, rows, floors
-		 *@param cols means how much columns the Maze3d Have 
-		 *@param rows means how much rows the Maze3d Have 
-		 *@param floors means how much floors the Maze3d Have
-		 *@return Maze3d 
-		 */
+
+	// Constractor
+	/**
+	 * This Constractor get 3 parameters : cols, rows, floors
+	 * 
+	 * @param cols
+	 *            means how much columns the Maze3d Have
+	 * @param rows
+	 *            means how much rows the Maze3d Have
+	 * @param floors
+	 *            means how much floors the Maze3d Have
+	 * @return Maze3d
+	 */
 	public Maze3d(int cols, int rows, int floors) {
 		this.cols = cols;
 		this.rows = rows;
 		this.floors = floors;
 		this.maze = new int[cols][rows][floors];
 	}
-	
+
 	/**
-	 * get methods : getRows, getCols, getFloors, getMaze, getStartPosition, getGoalPosition
-	 * set methods : setMaze, setStartPosition, setGoalPosition, setFree, setWall
+	 * get methods : getRows, getCols, getFloors, getMaze, getStartPosition,
+	 * getGoalPosition set methods : setMaze, setStartPosition, setGoalPosition,
+	 * setFree, setWall
 	 */
 	public int getRows() {
 		return rows;
 	}
-	
+
 	public int getCols() {
 		return cols;
 	}
-	
+
 	public int getFloors() {
 		return floors;
 	}
-	
+
 	public int[][][] getMaze() {
 		return maze;
 	}
@@ -70,16 +74,16 @@ public class Maze3d {
 
 	public static int getWall() {
 		return WALL;
-	}	
+	}
 
 	public void setWall(int x, int y, int z) {
 		maze[x][y][z] = WALL;
 	}
-	
+
 	public void setFree(int x, int y, int z) {
 		maze[x][y][z] = FREE;
 	}
-	
+
 	public int getValue(int x, int y, int z) {
 		return maze[x][y][z];
 	}
@@ -87,29 +91,31 @@ public class Maze3d {
 	public Position getStartPosition() {
 		return startPosition;
 	}
+
 	public void setStartPosition(Position startPosition) {
 		this.startPosition = startPosition;
 	}
+
 	public Position getGoalPosition() {
 		return goalPosition;
 	}
+
 	public void setGoalPosition(Position goalPosition) {
 		this.goalPosition = goalPosition;
 	}
-	
-	
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		for (int z = 0; z < floors; z++){
+		for (int z = 0; z < floors; z++) {
 			for (int y = 0; y < rows; y++) {
 				for (int x = 0; x < cols; x++) {
-					if(y == startPosition.y && x == startPosition.x && z== startPosition.z)
-						sb.append("E");
-					else if (y == goalPosition.y && x == goalPosition.x && z== goalPosition.z)
-						sb.append("x");
-						else
-							sb.append(maze[x][y][z] + " ");
+					if (y == startPosition.y && x == startPosition.x && z == startPosition.z)
+						sb.append("E ");
+					else if (y == goalPosition.y && x == goalPosition.x && z == goalPosition.z)
+						sb.append("X ");
+					else
+						sb.append(maze[x][y][z] + " ");
 				}
 				sb.append("\n");
 			}
@@ -117,136 +123,185 @@ public class Maze3d {
 		}
 		return sb.toString();
 	}
-	
+
 	/**
-	 * @param currPos means specific cell cols, rows, floors
+	 * @param currPos
+	 *            means specific cell cols, rows, floors
 	 * @return List of all the possible moves
 	 */
-public List<Position> getPossibleMoves(Position currPos) {
-		
+	public List<Position> getPossibleMoves(Position currPos) {
+
 		List<Position> directions = new ArrayList<Position>();
-		
+
 		if (currPos.x + 1 < cols)
-				if(maze[currPos.x + 1][currPos.y][currPos.z] == FREE) {
-			directions.add(new Position(currPos.x + 1,currPos.y,currPos.z));
-		}
-		
-		if (currPos.x - 1 >= 0) 
-				if(maze[currPos.x - 1][currPos.y][currPos.z] == FREE) {
-			directions.add(new Position(currPos.x - 1,currPos.y,currPos.z));
-		}
-		
-		if (currPos.y + 1 < rows) 
-				if(maze[currPos.x][currPos.y  + 1][currPos.z] == FREE) {
-			directions.add(new Position(currPos.x,currPos.y + 1,currPos.z));
-		}
-		
+			if (maze[currPos.x + 1][currPos.y][currPos.z] == FREE) {
+				directions.add(new Position(currPos.x + 1, currPos.y, currPos.z));
+			}
+
+		if (currPos.x - 1 >= 0)
+			if (maze[currPos.x - 1][currPos.y][currPos.z] == FREE) {
+				directions.add(new Position(currPos.x - 1, currPos.y, currPos.z));
+			}
+
+		if (currPos.y + 1 < rows)
+			if (maze[currPos.x][currPos.y + 1][currPos.z] == FREE) {
+				directions.add(new Position(currPos.x, currPos.y + 1, currPos.z));
+			}
+
 		if (currPos.y - 1 >= 0)
-				if(maze[currPos.x][currPos.y  - 1][currPos.z] == FREE) {
-			directions.add(new Position(currPos.x,currPos.y - 1,currPos.z));
-		}
-		
-		if (currPos.z + 1 < floors) 
-				if(maze[currPos.x][currPos.y][currPos.z + 1] == FREE) {
-			directions.add(new Position(currPos.x,currPos.y,currPos.z + 1));
-		}
-		
-		if (currPos.z - 1 >= 0) 
-				if(maze[currPos.x][currPos.y][currPos.z - 1] == FREE) {
-			directions.add(new Position(currPos.x,currPos.y,currPos.z - 1));
-		}
-		
+			if (maze[currPos.x][currPos.y - 1][currPos.z] == FREE) {
+				directions.add(new Position(currPos.x, currPos.y - 1, currPos.z));
+			}
+
+		if (currPos.z + 1 < floors)
+			if (maze[currPos.x][currPos.y][currPos.z + 1] == FREE) {
+				directions.add(new Position(currPos.x, currPos.y, currPos.z + 1));
+			}
+
+		if (currPos.z - 1 >= 0)
+			if (maze[currPos.x][currPos.y][currPos.z - 1] == FREE) {
+				directions.add(new Position(currPos.x, currPos.y, currPos.z - 1));
+			}
+
 		return directions;
 	}
 
- /**
- * @param x level
- * @return crossed 2d maze of the original 3d maze,by the cols
- */
-	public int[][] getCrossSectionByX(int x){
+	/**
+	 * @param x
+	 *            level
+	 * @return crossed 2d maze of the original 3d maze,by the cols
+	 */
+	public int[][] getCrossSectionByX(int x) {
 		int[][] tmpArr = new int[rows][floors];
-		
-		for (int z = 0 ; z < floors ; z++)
-			for(int y = 0 ; y < rows ; y++)
-				tmpArr[y][z]= maze[x][y][z];
-		
+
+		for (int z = 0; z < floors; z++)
+			for (int y = 0; y < rows; y++)
+				tmpArr[y][z] = maze[x][y][z];
+
 		return tmpArr;
 	}
-	
+
 	/**
-	* @param y level
-	* @return crossed 2d maze of the original 3d maze,by the rows
-    */
-	public int[][] getCrossSectionByY(int y){
+	 * @param y
+	 *            level
+	 * @return crossed 2d maze of the original 3d maze,by the rows
+	 */
+	public int[][] getCrossSectionByY(int y) {
 		int[][] tmpArr = new int[cols][floors];
-		
-		for (int z = 0 ; z < floors ; z++)
-			for(int x = 0 ; x < cols ; x++)
-				tmpArr[x][z]= maze[x][y][z];
-		
+
+		for (int z = 0; z < floors; z++)
+			for (int x = 0; x < cols; x++)
+				tmpArr[x][z] = maze[x][y][z];
+
 		return tmpArr;
 	}
-	
+
 	/**
-	* @param z level
-	* @return crossed 2d maze of the original 3d maze,by the floors
-	*/
-	public int[][] getCrossSectionByZ(int z){
+	 * @param z
+	 *            level
+	 * @return crossed 2d maze of the original 3d maze,by the floors
+	 */
+	public int[][] getCrossSectionByZ(int z) {
 		int[][] tmpArr = new int[cols][rows];
-		
-		for(int y = 0 ; y < rows ; y++)
-			for(int x = 0 ; x < cols ; x++)
-				tmpArr[x][y]= maze[x][y][z];
-		
+
+		for (int y = 0; y < rows; y++)
+			for (int x = 0; x < cols; x++)
+				tmpArr[x][y] = maze[x][y][z];
+
 		return tmpArr;
 	}
-	
+
 	public Maze3d(byte[] arr) {
 		int k = 0;
 		this.rows = arr[k++];
 		this.cols = arr[k++];
 		this.floors = arr[k++];
-		maze = new int[cols][rows][floors];		
-		
+		maze = new int[cols][rows][floors];
+
 		Position startPos = new Position(arr[k++], arr[k++], arr[k++]);
 		this.setStartPosition(startPos);
 		Position goalPos = new Position(arr[k++], arr[k++], arr[k++]);
 		this.setGoalPosition(goalPos);
-		
+
 		for (int z = 0; z < floors; z++) {
-		for (int y = 0; y < rows; y++) {
-			for (int x = 0; x < cols; x++) {
-				maze[x][y][z] = arr[k++];
-			}	
-			}		
+			for (int y = 0; y < rows; y++) {
+				for (int x = 0; x < cols; x++) {
+					maze[x][y][z] = arr[k++];
+				}
+			}
 		}
 	}
-	
+
 	public byte[] toByteArray() {
 		ArrayList<Byte> arr = new ArrayList<Byte>();
-		arr.add((byte)rows);
-		arr.add((byte)cols);
-		arr.add((byte)floors);
-		arr.add((byte)startPosition.x);
-		arr.add((byte)startPosition.y);
-		arr.add((byte)startPosition.z);
-		arr.add((byte)goalPosition.x);
-		arr.add((byte)goalPosition.y);
-		arr.add((byte)goalPosition.z);
-		
+		arr.add((byte) rows);
+		arr.add((byte) cols);
+		arr.add((byte) floors);
+		arr.add((byte) startPosition.x);
+		arr.add((byte) startPosition.y);
+		arr.add((byte) startPosition.z);
+		arr.add((byte) goalPosition.x);
+		arr.add((byte) goalPosition.y);
+		arr.add((byte) goalPosition.z);
+
 		for (int z = 0; z < floors; z++) {
-		for (int y = 0; y < rows; y++) {
-			for (int x = 0; x < cols; x++) {
-				arr.add((byte)maze[x][y][z]);
-			}	
+			for (int y = 0; y < rows; y++) {
+				for (int x = 0; x < cols; x++) {
+					arr.add((byte) maze[x][y][z]);
+				}
+			}
 		}
-		}
-		
+
 		byte[] bytes = new byte[arr.size()];
+
 		for (int i = 0; i < bytes.length; i++) {
-			bytes[i] = (byte)arr.get(i);
+			bytes[i] = (byte) arr.get(i);
 		}
 		return bytes;
+	}
+	
+	public boolean equals (Maze3d maze)
+	{
+		
+		if ((this.getFloors() != maze.getFloors()) || 
+		    (this.getRows() != maze.getRows()) ||
+		    (this.getCols() != maze.getCols()))
+		{
+			return false;
+		}
+		
+		if (!(this.getStartPosition().getZ() == maze.getStartPosition().getZ()) &&
+		     (this.getStartPosition().getY() == maze.getStartPosition().getY()) &&
+		     (this.getStartPosition().getX() == maze.getStartPosition().getX()))
+		{
+			return false;
+		}	
+		
+		if (!(this.getGoalPosition().getZ() == maze.getGoalPosition().getZ()) &&
+		     (this.getGoalPosition().getY() == maze.getGoalPosition().getY()) &&
+			 (this.getGoalPosition().getX() == maze.getGoalPosition().getX()))
+		{
+			return false;
+		}	
+		
+		
+		for (int z = 0; z < this.getFloors(); z++) {
+			for (int y = 0; y < this.getRows(); y++) {
+				for (int x = 0; x < this.getCols(); x++) {
+					
+					if (this.maze[x][y][z]!=maze.getMaze()[x][y][z])
+					{
+						return false;
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		return true;
+	
 	}
 
 }

@@ -21,73 +21,17 @@ public class Run {
 		Maze3dGenerator generator = new GrowingTreeGenerator();
 		Maze3d maze = generator.generate(5, 5, 3);
 		System.out.println(maze);
-		MyCompressorOutputStream out =new MyCompressorOutputStream(new FileOutputStream("2.maz"));
+		// save it to a file
+		OutputStream out=new MyCompressorOutputStream(new FileOutputStream("1.maz"));
 		out.write(maze.toByteArray());
-		MyDecompressorInputStream in=new MyDecompressorInputStream(new FileInputStream("2.maz"));
-		byte n[]=new byte[maze.toByteArray().length];
-		in.read(n);
+		out.flush();
+		out.close();
+		InputStream in=new MyDecompressorInputStream(new FileInputStream("1.maz"));
+		byte b[]=new byte[maze.toByteArray().length];
+		in.read(b);
 		in.close();
-		System.out.println(n);
-//		// save it to a file
-//		OutputStream out=new MyCompressorOutputStream(new FileOutputStream("1.maz"));
-//		out.write(maze.toByteArray());
-//		out.flush();
-//		out.close();
-//		InputStream in=new MyDecompressorInputStream(new FileInputStream("1.maz"));
-//		byte b[]=new byte[maze.toByteArray().length];
-//		in.read(b);
-//		in.close();
-//		Maze3d loaded=new Maze3d(b);
-//		System.out.println(loaded.equals(maze));
-		
-//		System.out.println(maze);
-		
-//		SearchableMaze3d adapter = new  SearchableMaze3d(maze);
-//		BFS<Position> bfs = new BFS<Position>();
-//		Solution<Position> solution = bfs.search(adapter);
-//		System.out.println(solution);
-		
-//		// save it to a file
-//		OutputStream out;
-//		try {
-//			out = new MyCompressorOutputStream(
-//					new FileOutputStream("1.maz"));
-//			byte[] arr = maze.toByteArray();
-//			
-//			out.write(arr.length);
-//			out.write(arr);
-//			out.flush();
-//			out.close();
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}		
-//		
-//		InputStream in;
-//		try {
-//			in = new MyDecompressorInputStream(
-//				new FileInputStream("1.maz"));
-//			int size = in.read();			
-//			byte b[]=new byte[size];
-//			in.read(b);
-//			in.close();	
-//			
-//			Maze3d loaded = new Maze3d(b);
-//			System.out.println("maze loaded from file:");
-//			System.out.println(loaded.equals(maze));
-//			//System.out.println(loaded);
-//			
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//	}
-}
+		Maze3d loaded=new Maze3d(b);
+		System.out.println(loaded);
+		System.out.println(loaded.equals(maze));		
+	}
 }

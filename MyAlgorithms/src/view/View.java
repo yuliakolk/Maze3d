@@ -16,4 +16,5 @@ public interface View {
 	void start();
 	void setController(Controller controller);
 	void printCrossSectionBy(String t, String name);
+	void displayMessage(String msg);
 }
