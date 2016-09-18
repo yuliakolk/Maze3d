@@ -1,13 +1,12 @@
 package algorithms.mazeGenerators;
 
 	/**
- 	* @author  Yulia Kolk
+ 	* @author  Chen Hamdani & Yulia Kolk
 	* @version 1.0
-	* @since   30/08/2015 
+	* @since   30/08/2016
 
 	* <h1>SimpleMaze3dGenerator</h1>
-	* This class will extends Maze3dGeneratorBase and will create a new maze white a random algorithms
-	* this algo will Promise a start and goal position 
+	* This class extends Maze3dGeneratorBase and creates a new maze with random algorithms
 	*/
 
 
@@ -18,6 +17,12 @@ public class SimpleMaze3dGenerator extends Maze3dGeneratorBase {
 	private Random rand = new Random();
 	private static final float WALLS_RATIO = 0.5F;
 	
+	
+	/**
+	 * 
+	 * @param mazeObj
+	 * @return a random position to start the maze from
+	 */
 	private Position chooseRandomStartPosition(Maze3d mazeObj){
 		int[][][] maze =mazeObj.getMaze();
 		int x, y, z ;
@@ -35,6 +40,11 @@ public class SimpleMaze3dGenerator extends Maze3dGeneratorBase {
 		return pos;
 	}
 	
+	/**
+	 * 
+	 * @param mazeObj
+	 * @return a random position to be the end of the maze
+	 */
 	private Position chooseRandomGoalPosition(Maze3d mazeObj)
 	{
 		int[][][] maze =mazeObj.getMaze();
@@ -53,6 +63,11 @@ public class SimpleMaze3dGenerator extends Maze3dGeneratorBase {
 		return pos;
 	}
 	
+	/**
+	 * Alters the maze to have a possible solution	
+	 * @param maze3d
+	 * @return the altered maze
+	 */
 	public Maze3d createPath(Maze3d maze3d){
 		Position start = maze3d.getStartPosition();
 		Position goal = maze3d.getGoalPosition();
@@ -77,6 +92,11 @@ public class SimpleMaze3dGenerator extends Maze3dGeneratorBase {
 		
 	}
 	
+	/**
+	 * sets walls in random cells in the maze
+	 * @param maze3d
+	 * @return the changed maze
+	 */
 	private Maze3d randomWalls(Maze3d maze3d){
 		int wallsNum = (int)(WALLS_RATIO *maze3d.getFloors()*maze3d.getCols()*maze3d.getRows());
 		int x,y,z;
@@ -92,6 +112,9 @@ public class SimpleMaze3dGenerator extends Maze3dGeneratorBase {
 		return maze3d;
 	}
 	
+	/**
+	 * generates a maze by the received dimensions
+	 */
 	@Override
 	public Maze3d generate(int cols, int rows, int floors) {
 		Maze3d maze3d = new Maze3d(cols, rows, floors);

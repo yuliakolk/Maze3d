@@ -14,7 +14,7 @@ package algorithms.search;
 /**
 * @author  Yulia Kolk
 * @version 1.0
-* @since   30/08/2015 
+* @since   30/08/2016
 *  <h1>BFS</h1>
 * This class defining a BFS algorithm type of Searcher that can solve Problems.
 * This class extends CommonSearcher
@@ -23,7 +23,7 @@ package algorithms.search;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
-public class Bfs<T> extends CommonSearcher<T> {
+public class BFS<T> extends CommonSearcher<T> {
 	
 	private PriorityQueue<State<T>> openList = new PriorityQueue<State<T>>();
 	private PriorityQueue<State<T>> closedList = new PriorityQueue<State<T>>(); //PriorityQueue for all the members that has worked on
@@ -79,7 +79,7 @@ public class Bfs<T> extends CommonSearcher<T> {
 				}
 			}
 		}
-		System.out.println("There problem cant be solved" + evaluatedNodes);	//if the openList is empty and it not got to the goal state, then the problen cant be solved
+		System.out.println("There problem cant be solved " + evaluatedNodes);	//if the openList is empty and it not got to the goal state, then the problen cant be solved
 		return null;
 	}
 

@@ -1,12 +1,12 @@
 package algorithms.mazeGenerators;
 
 /**
-* @author Yulia Kolk
+* @author  Chen Hamdani &&  Yulia Kolk
 * @version 1.0
-* @since   30/08/2015 
+* @since   30/08/2016
 * 
  * <h1>Maze3d</h1>
- * This class defining Maze3d
+ * This class defines Maze3d
  */
 
 import java.util.ArrayList;
@@ -24,16 +24,16 @@ public class Maze3d {
 	public static final int FREE = 0;
 	public static final int WALL = 1;
 
-	// Constractor
+	
 	/**
 	 * This Constractor get 3 parameters : cols, rows, floors
 	 * 
 	 * @param cols
-	 *            means how much columns the Maze3d Have
+	 *            means how many columns the Maze3d Have
 	 * @param rows
-	 *            means how much rows the Maze3d Have
+	 *            means how many rows the Maze3d Have
 	 * @param floors
-	 *            means how much floors the Maze3d Have
+	 *            means how many floors the Maze3d Have
 	 * @return Maze3d
 	 */
 	public Maze3d(int cols, int rows, int floors) {
@@ -168,7 +168,6 @@ public class Maze3d {
 
 	/**
 	 * @param x
-	 *            level
 	 * @return crossed 2d maze of the original 3d maze,by the cols
 	 */
 	public int[][] getCrossSectionByX(int x) {
@@ -183,7 +182,6 @@ public class Maze3d {
 
 	/**
 	 * @param y
-	 *            level
 	 * @return crossed 2d maze of the original 3d maze,by the rows
 	 */
 	public int[][] getCrossSectionByY(int y) {
@@ -198,7 +196,6 @@ public class Maze3d {
 
 	/**
 	 * @param z
-	 *            level
 	 * @return crossed 2d maze of the original 3d maze,by the floors
 	 */
 	public int[][] getCrossSectionByZ(int z) {
@@ -211,6 +208,10 @@ public class Maze3d {
 		return tmpArr;
 	}
 
+	/**
+	 * Creates a maze by the received byte array
+	 * @param arr
+	 */
 	public Maze3d(byte[] arr) {
 		int k = 0;
 		this.rows = arr[k++];
@@ -232,6 +233,10 @@ public class Maze3d {
 		}
 	}
 
+	/**
+	 * 
+	 * @return the current maze converted to a byte array 
+	 */
 	public byte[] toByteArray() {
 		ArrayList<Byte> arr = new ArrayList<Byte>();
 		arr.add((byte) rows);
@@ -260,6 +265,11 @@ public class Maze3d {
 		return bytes;
 	}
 	
+	/**
+	 * checks whether the received maze is equal to the current maze
+	 * @param maze
+	 * @return true if equals, false if isn't
+	 */
 	public boolean equals (Maze3d maze)
 	{
 		

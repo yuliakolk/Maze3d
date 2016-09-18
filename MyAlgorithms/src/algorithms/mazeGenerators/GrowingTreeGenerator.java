@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 public class GrowingTreeGenerator extends Maze3dGeneratorBase {
 	
 	private Random rand = new Random();	
@@ -13,13 +14,13 @@ public class GrowingTreeGenerator extends Maze3dGeneratorBase {
 		Maze3d maze = new Maze3d(cols, rows, floors);
 		List<Position> cells = new ArrayList<Position>();
 		
-		// Place walls in every cell
-		initialize(maze);
-		
 		// Choose random start position and mark it as free
-		Position startPos = chooseRandomPosition(maze);
+		Position startPos = chooseRandomStartPosition(maze);
 		maze.setStartPosition(startPos);
 		Position pos = startPos;
+		
+		// Place walls in every cell
+		initialize(maze);
 
 		cells.add(startPos);
 		
@@ -56,7 +57,7 @@ public class GrowingTreeGenerator extends Maze3dGeneratorBase {
 		}
 		}
 		
-		Position goalPosition = chooseRandomPosition(maze);
+		Position goalPosition = chooseRandomGoalPosition(maze);
 		maze.setGoalPosition(goalPosition);
 		
 		return maze;
@@ -71,6 +72,52 @@ public class GrowingTreeGenerator extends Maze3dGeneratorBase {
 				}
 			}
 		}
+	}
+	
+	
+	/**
+	 * 
+	 * @param mazeObj
+	 * @return a random position to start the maze from
+	 */
+	private Position chooseRandomStartPosition(Maze3d mazeObj){
+		int[][][] maze =mazeObj.getMaze();
+		int x, y, z ;
+		
+		//Entrance on the bottom level
+		z=0;
+		
+		do{
+			x = rand.nextInt(mazeObj.getCols());
+			y = rand.nextInt(mazeObj.getRows());
+		}
+		while (maze[x][y][z] == Maze3d.WALL);
+		
+		Position pos = new Position(x, y, z);
+		return pos;
+	}
+	
+	/**
+	 * 
+	 * @param mazeObj
+	 * @return a random position to be the end of the maze
+	 */
+	private Position chooseRandomGoalPosition(Maze3d mazeObj)
+	{
+		int[][][] maze =mazeObj.getMaze();
+		int x, y, z;
+		
+		// Exit on the top level
+		z=mazeObj.getFloors()-1;
+		
+		do{
+			x = rand.nextInt(mazeObj.getCols());
+			y = rand.nextInt(mazeObj.getRows());
+		}
+		while (maze[x][y][z] == Maze3d.WALL);
+		
+		Position pos = new Position(x, y, z);
+		return pos;
 	}
 	
 	private Position chooseRandomPosition(Maze3d maze) {	

@@ -3,13 +3,19 @@ package algorithms.search;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Dfs<T> extends CommonSearcher<T> {
+     /**
+     * @author  Yulia Kolk
+     * @version 1.0
+     * @since   30/08/2016 
+     */
+
 	/**
 	 * this is a Recursively function that find one way to solve the problem (not the best way)
 	 * this is a depth search and this algorithm always go depth and check if there is more nodes down.
 	 * if there is- and this last one is the goal- we find a way.
 	 * else- we are come back to the last nodes and check is Other neighbors
 	 */
+	public class DFS<T> extends CommonSearcher<T> {
 	private ArrayList<State <T>> Visit=new ArrayList<State<T>>();
 	Solution<T> sol=new Solution<T>();
 	@Override

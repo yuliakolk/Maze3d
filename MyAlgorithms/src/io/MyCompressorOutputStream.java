@@ -5,8 +5,13 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * This class represent compressor for maze3d (from any stream)
- */
+*@author  Chen Hamdani and Yulia Kolk
+* @version 1.0
+* @since   15/09/2016 
+* 
+* <h1>MyCompressorOutputStream</h1>
+* This class represent compressor for maze3d.
+*/
 public class MyCompressorOutputStream extends OutputStream {
 
 	private OutputStream out;

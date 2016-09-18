@@ -5,7 +5,12 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * This class represent decompressor for maze3d (from any stream)
+*@author  Chen Hamdani and Yulia Kolk
+* @version 1.0
+* @since   15/09/2016 
+* 
+* <h1>MyDecompressorInputStream</h1>
+ * This class represent decompressor for maze3d
  */
 public class MyDecompressorInputStream extends InputStream {
 
@@ -36,7 +41,7 @@ public class MyDecompressorInputStream extends InputStream {
 		byte[] readStream = new byte[9];	
 		// Read: size of maze dimensions + start position + goal position		
 		
-		this.inBuff.read(); // reads the length of the maze (first byte)
+		//this.inBuff.read(); // reads the length of the maze (first byte)
 		
 		this.inBuff.read(readStream, 0, 9);
 		System.arraycopy(readStream, 0, b, 0, 9);
@@ -47,7 +52,7 @@ public class MyDecompressorInputStream extends InputStream {
 		while ((this.currentReadSize = this.inBuff.read(readStream)) > -1) {
 			flushBuffer(readStream, b);
 		}
-		return readerIndex;		// the amount of bytes readed
+		return readerIndex;		// the amount of bytes read
 	}
 	
 	/**

@@ -1,5 +1,28 @@
 package algorithms.mazeGenerators;
 
+/**
+
+* @author  Yulia Kolk
+
+* @version 1.0
+
+* @since   30/08/2016 
+
+*/
+
+/**
+
+* <h1>Position</h1>
+
+* This class defining a position of a cell
+
+* this cell represent by a point in a feald 
+
+* this position have a 3 premtive paramter x,y,z
+
+*/
+
+
 public class Position {
 	public int x; 
 	public int y;

@@ -3,7 +3,7 @@ package algorithms.search;
 /**
 * @author  Yulia Kolk
 * @version 1.0
-* @since   30/08/2015 
+* @since   30/08/2016
 * 
 * <h1>Searchable</h1>
 * This  interface  Searchable define the Functionality of the problem

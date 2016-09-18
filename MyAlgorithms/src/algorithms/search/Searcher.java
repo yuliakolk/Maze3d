@@ -3,7 +3,8 @@ package algorithms.search;
 /**
 * @author  Yulia Kolk
 * @version 1.0
-* @since   30/08/2015 
+* @since   30/08/2016
+* 
 * <h1>Searcher</h1>
 * This  interface define searcher algorithms.
 * This  interface  - searcher define the Functionality of the algorithms
