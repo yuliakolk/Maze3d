@@ -48,11 +48,11 @@ public class MyModel extends Observable implements Model {
 	private Map<String, Maze3d> mazes = new ConcurrentHashMap<String,Maze3d>();
 //	private List<Thread> threads = new ArrayList<Thread>();
 
-	public MyModel() {
-		properties = PropertiesLoader.getInstance().getProperties();
-		executor = Executors.newFixedThreadPool(properties.getNumOfThreads());
-		loadSolutions();
-	}	
+//	public MyModel() {
+//	properties = PropertiesLoader.getInstance().getProperties();
+//		executor = Executors.newFixedThreadPool(properties.getNumOfThreads());
+//		loadSolutions();
+//	}	
 	
 	class GenerateMazeRunnable implements Runnable {
 
