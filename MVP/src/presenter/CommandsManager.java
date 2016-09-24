@@ -89,7 +89,7 @@ public class CommandsManager {
 		public void doCommand(String[] args) {
 			String name = args[0];
 			Maze3d maze = model.displayMaze(name);
-			view.displayMaze(maze);
+			view.displayMaze(maze,name);
 		}
 		
 	}
@@ -99,8 +99,8 @@ public class CommandsManager {
 		@Override
 		public void doCommand(String[] args) {
 			String name = args[0];
-			String msg = "maze " + name + " is ready";
-		view.displayMessage(msg);
+			//String msg = "maze " + name + " is ready";
+		view.displayMessage(name);
 		}
 		
 	}

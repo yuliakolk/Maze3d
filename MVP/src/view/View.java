@@ -17,7 +17,7 @@ import presenter.Command;
 
 public interface View {
 	void notifyMazeIsReady(String name);
-	void displayMaze(Maze3d maze);
+	void displayMaze(Maze3d maze,String name);
 	void dir(String path);
 	void displaySolution(Solution sol);
 	void start();

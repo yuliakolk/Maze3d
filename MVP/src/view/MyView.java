@@ -86,7 +86,7 @@ public class MyView extends Observable implements View, Observer {
 	}
 
 	@Override
-	public void displayMaze(Maze3d maze) {
+	public void displayMaze(Maze3d maze, String name) {
 		out.println(maze);
 		out.flush();
 	}
@@ -156,7 +156,6 @@ public class MyView extends Observable implements View, Observer {
 			notifyObservers(arg);
 		}
 	}
-
 }
 
 		

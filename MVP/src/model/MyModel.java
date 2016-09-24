@@ -43,41 +43,42 @@ public class MyModel extends Observable implements Model {
 	
 	private ExecutorService executor;
 	
-	private Map<String, Solution<Position>> solutions = new ConcurrentHashMap<String, Solution<Position>>();
 	private Properties properties;
 	private Map<String, Maze3d> mazes = new ConcurrentHashMap<String,Maze3d>();
+	private Map<String, Solution<Position>> solutions = new ConcurrentHashMap<String, Solution<Position>>();
 //	private List<Thread> threads = new ArrayList<Thread>();
 
-//	public MyModel() {
-//	properties = PropertiesLoader.getInstance().getProperties();
-//		executor = Executors.newFixedThreadPool(properties.getNumOfThreads());
-//		loadSolutions();
-//	}	
+	public MyModel() {
+		//properties = PropertiesLoader.getInstance().getProperties();
+		//executor = Executors.newFixedThreadPool(properties.getNumOfThreads());
+		executor = Executors.newFixedThreadPool(50);
+		loadSolutions();
+	}	
 	
-	class GenerateMazeRunnable implements Runnable {
-
-		private int floors, rows, cols;
-		private String name;
-		private GrowingTreeGenerator generator;
-		
-		public GenerateMazeRunnable(int cols, int rows, int floors, String name) {
-			this.cols = cols;
-			this.rows = rows;
-			this.floors = floors;
-			this.name = name;
-		}
-		
-		@Override
-		public void run() {
-			generator = new GrowingTreeGenerator();
-			Maze3d maze = generator.generate(cols, rows, floors);
-			mazes.put(name, maze);	
-		}
-		
-		public void terminate() {
-			generator.setDone(true);
-		}		
-	}
+//	class GenerateMazeRunnable implements Runnable {
+//
+//		private int floors, rows, cols;
+//		private String name;
+//		private GrowingTreeGenerator generator;
+//		
+//		public GenerateMazeRunnable(int cols, int rows, int floors, String name) {
+//			this.cols = cols;
+//			this.rows = rows;
+//			this.floors = floors;
+//			this.name = name;
+//		}
+//		
+//		@Override
+//		public void run() {
+//			generator = new GrowingTreeGenerator();
+//			Maze3d maze = generator.generate(cols, rows, floors);
+//			mazes.put(name, maze);	
+//		}
+//		
+//		public void terminate() {
+//			generator.setDone(true);
+//		}		
+//	}
 
 	//Parameters of the crossSection
 		private int [][] arr;
