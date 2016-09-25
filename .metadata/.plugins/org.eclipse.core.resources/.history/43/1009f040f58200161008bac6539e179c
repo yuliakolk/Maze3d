@@ -1,0 +1,71 @@
+package algorithms.mazeGenerators;
+
+public class Maze2d {
+	private int[][] maze;
+	private int rows;
+	private int cols; 
+	private Position startPosition;
+	private Position goalPosition;
+	
+	public final static int WALL = 1;
+	public final static int FREE = 0;
+		
+	public Maze2d(int rows, int cols) {
+		this.rows = rows;
+		this.cols = cols;
+		maze = new int[rows][cols];
+	}
+
+	public Position getStartPosition() {
+		return startPosition;
+	}
+
+	public void setStartPosition(Position startPosition) {
+		this.startPosition = startPosition;
+	}
+
+	public Position getGoalPosition() {
+		return goalPosition;
+	}
+
+	public void setGoalPosition(Position goalPosition) {
+		this.goalPosition = goalPosition;
+	}
+	
+	public void setFreeCell(Position pos) {
+		maze[pos.y][pos.x] = FREE;
+	}
+	
+	public void setWall(Position pos) {
+		maze[pos.y][pos.x] = WALL;
+	}
+
+	public int[][] getMaze() {
+		return maze;
+	}
+
+	public int getRows() {
+		return rows;
+	}
+
+	public int getCols() {
+		return cols;
+	}
+
+	@Override
+	public String toString() {		
+		StringBuilder sb = new StringBuilder();
+		for (int y = 0; y < rows; y++) {
+			for (int x = 0; x < cols; x++) {
+				if (y == startPosition.y && x == startPosition.x) 
+					sb.append("E");
+				else if (y == goalPosition.y && x == goalPosition.x)
+					sb.append("X");
+				else
+					sb.append(maze[y][x]);
+			}
+			sb.append("\n");
+		}
+		return sb.toString();
+	}
+}

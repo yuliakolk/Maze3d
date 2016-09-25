@@ -1,0 +1,46 @@
+package algorithms.mazeGenerators;
+
+import java.util.Random;
+
+public class SimpleMaze2dGenerator extends Maze2dGeneratorBase {
+
+	private Random rand = new Random();
+	private static final float WALL_RATIO = 0.5F;
+	
+	private Position chooseRandomFreePosition(Maze2d mazeObj) {
+		
+		int[][] maze = mazeObj.getMaze();
+		int x, y;
+		
+		do {
+			x = rand.nextInt(mazeObj.getCols());
+			y = rand.nextInt(mazeObj.getRows());
+		}
+		while (maze[y][x] == Maze2d.WALL);
+		
+		Position pos = new Position(y, x);
+		return pos;		
+	}
+	
+	@Override
+	public Maze2d generate(int rows, int cols) {
+		Maze2d mazeObj = new Maze2d(rows, cols);
+		int wallsCount = (int)(rows * cols * WALL_RATIO);
+		int[][] maze = mazeObj.getMaze();
+		
+		for (int i = 0; i < wallsCount; i++) {
+			int x = rand.nextInt(cols);
+			int y = rand.nextInt(rows);
+			
+			maze[y][x] = Maze2d.WALL;			
+		}
+		
+		Position startPos = chooseRandomFreePosition(mazeObj);
+		Position goalPos = chooseRandomFreePosition(mazeObj);
+		mazeObj.setStartPosition(startPos);
+		mazeObj.setGoalPosition(goalPos);		
+		
+		return mazeObj;
+	}
+
+}

@@ -1,0 +1,138 @@
+package algorithms.mazeGenerators;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class GrowingTreeGenerator extends Maze2dGeneratorBase {
+
+	private Random rand = new Random();
+	
+	private void initalizeMaze(Maze2d maze) {
+		int[][] mat = maze.getMaze();
+		
+		for (int x = 0; x < maze.getCols(); x++) {
+			for (int y = 0; y < maze.getRows(); y++) {
+				mat[y][x] = Maze2d.WALL;
+			}
+		}
+	}
+	
+	private Position getRandomPosition(Maze2d maze) {
+		int x = rand.nextInt(maze.getCols());
+		while (x % 2 == 1) {
+			x = rand.nextInt(maze.getCols());
+		}
+		
+		int y = rand.nextInt(maze.getRows());
+		while (y % 2 == 1) {
+			y = rand.nextInt(maze.getRows());
+		}
+		
+		return new Position(x, y);		
+	}
+	
+	private Position getRandomGoalPosition(Maze2d maze) {
+		int[][] mat = maze.getMaze();
+		int x = rand.nextInt(maze.getCols());
+		int y = rand.nextInt(maze.getRows());
+		
+		while (mat[y][x] == Maze2d.WALL) {
+			x = rand.nextInt(maze.getCols());
+			y = rand.nextInt(maze.getRows());
+		}
+		return new Position(x, y);
+	}
+	
+	private List<Position> getUnivisitedNeighbors(Maze2d maze, Position pos) {
+		//int[][] directions = {{-2, 0}, {+2, 0}, {0, -2}, {0, +2}};
+		
+		List<Position> neighbors = new ArrayList<Position>();
+		
+		int[][] mat = maze.getMaze();
+		if (pos.x - 2 >= 0) {
+			if (mat[pos.y][pos.x - 2] == Maze2d.WALL) {
+				neighbors.add(new Position(pos.x - 2, pos.y));
+			}
+		}
+		
+		if (pos.x + 2 < maze.getCols()) {
+			if (mat[pos.y][pos.x + 2] == Maze2d.WALL) {
+				neighbors.add(new Position(pos.x + 2, pos.y));
+			}
+		}
+		
+		if (pos.y - 2 >= 0) {
+			if (mat[pos.y - 2][pos.x] == Maze2d.WALL) {
+				neighbors.add(new Position(pos.x, pos.y - 2));
+			}
+		}
+		
+		if (pos.y + 2 < maze.getRows()) {
+			if (mat[pos.y + 2][pos.x] == Maze2d.WALL) {
+				neighbors.add(new Position(pos.x, pos.y + 2));
+			}
+		}
+		return neighbors;
+	}
+	
+	@Override
+	public Maze2d generate(int rows, int cols) {
+		Maze2d maze = new Maze2d(rows, cols);
+		
+		// Place walls in every cell
+		initalizeMaze(maze);
+		
+		List<Position> cells = new ArrayList<Position>();
+		
+		// Choose random start position and mark it as free
+		Position startPos = getRandomPosition(maze);
+		cells.add(startPos);
+		maze.setStartPosition(startPos);
+		maze.setFreeCell(startPos);
+		
+		// TODO: Allow the user to choose the method for selecting the cell
+		// Currently choosing the last cell added to C
+		while (!cells.isEmpty()) {		
+			Position pos = cells.get(cells.size() - 1);
+			
+			// Get all unvisited neighbors
+			List<Position> neighbors = getUnivisitedNeighbors(maze, pos);
+			if (neighbors.size() > 0) {
+				
+				// Choose a random neighbor
+				int idx = rand.nextInt(neighbors.size());
+				Position neighbor = neighbors.get(idx);
+				
+				createPassageBetweenCells(maze, pos, neighbor);
+				cells.add(neighbor);
+			}
+			else {
+				cells.remove(pos);
+			}		
+		}
+		maze.setGoalPosition(getRandomGoalPosition(maze));
+		
+		return maze;
+	}
+
+	private void createPassageBetweenCells(Maze2d maze, Position pos, Position neighbor) {
+		if (neighbor.x == pos.x - 2) {  // Left neighbor
+			maze.setFreeCell(new Position(pos.x - 1, pos.y));
+			maze.setFreeCell(new Position(pos.x - 2, pos.y));
+		}
+		else if (neighbor.x == pos.x + 2) {  // Right neighbor
+			maze.setFreeCell(new Position(pos.x + 1, pos.y));
+			maze.setFreeCell(new Position(pos.x + 2, pos.y));
+		}
+		else if (neighbor.y == pos.y - 2) {  // Up neighbor
+			maze.setFreeCell(new Position(pos.x, pos.y - 1));
+			maze.setFreeCell(new Position(pos.x, pos.y - 2));
+		}
+		else if (neighbor.y == pos.y + 2) {  // Down neighbor
+			maze.setFreeCell(new Position(pos.x, pos.y + 1));
+			maze.setFreeCell(new Position(pos.x, pos.y + 2));
+		}		
+	}
+
+}

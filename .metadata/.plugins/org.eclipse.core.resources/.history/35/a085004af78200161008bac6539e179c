@@ -1,0 +1,53 @@
+package algorithms.search;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import algorithms.demo.SearchableMaze3d;
+import algorithms.mazeGenerators.GrowingTreeGenerator;
+import algorithms.mazeGenerators.Maze3d;
+import algorithms.mazeGenerators.Position;
+import algorithms.mazeGenerators.SimpleMaze3dGenerator;
+
+public class BFSTest {
+
+	@Test
+	public void test() {
+		
+		tester(1,1,1);
+		
+//		tester(0,5,5);
+//		
+//		tester(5,0,5);
+//		
+//		tester(0,0,5);
+//		
+//		tester(0,5,5);
+//		
+//		tester(5,5,0);
+//		
+//		tester(1,5,5);
+//		
+//		tester(5,5,1);
+//		
+//		tester(0,5,5);
+
+//		fail("Not yet implemented");
+	}
+	
+	public void tester(int cols, int rows, int floors) {
+		
+		Maze3d maze;
+		GrowingTreeGenerator mymaze=new GrowingTreeGenerator();
+		
+		BFS<Position> bfs = new BFS<Position>();
+		
+		maze=mymaze.generate(cols, rows, floors);
+		SearchableMaze3d mys= new SearchableMaze3d(maze);
+		bfs.search(mys);
+		
+		System.out.println("the number of node that the algorithns evaluated: " + bfs.getNumberOfNodesEvaluated());
+	}
+ 
+}

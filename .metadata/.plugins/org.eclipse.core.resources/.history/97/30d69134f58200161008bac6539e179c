@@ -1,0 +1,6 @@
+package algorithms.mazeGenerators;
+
+public interface Maze2dGenerator {
+	Maze2d generate(int rows, int cols);
+	String measureAlgorithmTime(int rows, int cols);
+}
