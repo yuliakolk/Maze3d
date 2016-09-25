@@ -21,6 +21,7 @@ import algorithms.demo.SearchableMaze3d;
 import algorithms.mazeGenerators.GrowingTreeGenerator;
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Position;
+import algorithms.mazeGenerators.RandomCellSelector;
 import algorithms.search.BFS;
 import algorithms.search.DFS;
 import algorithms.search.Searcher;

@@ -5,7 +5,7 @@ import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 
 public class Character {
-	private Position pos;
+	private Position2D pos;
 	private Image img;
 	
 	
@@ -13,11 +13,11 @@ public class Character {
 		img = new Image(null, "images/character.jpg");
 	}
 
-	public Position getPos() {
+	public Position2D getPos() {
 		return pos;
 	}
 
-	public void setPos(Position pos) {
+	public void setPos(Position2D pos) {
 		this.pos = pos;
 	}
 	
@@ -30,5 +30,16 @@ public class Character {
 		pos.x++;
 	}
 	
+	public void moveLeft() {
+		pos.x--;
+	}
+	
+	public void moveUp() {
+		pos.y--;
+	}
+	
+	public void moveDown() {
+		pos.y++;
+	}
 
 }

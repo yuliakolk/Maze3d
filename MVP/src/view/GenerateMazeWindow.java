@@ -15,7 +15,7 @@ import algorithms.search.Solution;
 
 public class GenerateMazeWindow extends DialogWindow {
 	
-	private MazeDisplay mazeDisplay;
+	//private MazeDisplay mazeDisplay;
 	public int rows;
 	public int cols;
 	public int floors;
